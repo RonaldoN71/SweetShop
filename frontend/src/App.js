@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -14,12 +15,16 @@ import RestockSweet from "./pages/RestockSweet";
 function App() {
   return (
     <Router>
+      {/* AuthProvider keeps user + token available across the app */}
       <AuthProvider>
         <Navbar />
+
+        {/* Application Routes */}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
+          {/* Protected Pages */}
           <Route
             path="/"
             element={
@@ -28,6 +33,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/create"
             element={
@@ -36,6 +42,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/edit/:id"
             element={
@@ -44,6 +51,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/purchase/:id"
             element={
@@ -52,6 +60,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/restock/:id"
             element={
