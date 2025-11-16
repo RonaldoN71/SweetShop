@@ -15,6 +15,7 @@ export default function EditSweet() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [err, setErr] = useState("");
 
+  // load sweet details on mount
   useEffect(() => {
     (async () => {
       try {
@@ -28,16 +29,18 @@ export default function EditSweet() {
 
   const submit = async (e) => {
     e.preventDefault();
-    try {
-      const form = new FormData();
+    setErr("");
 
+    try {
+      // backend needs multipart form
+      const form = new FormData();
       form.append("name", sweet.name);
       form.append("category", sweet.category);
       form.append("price", sweet.price);
       form.append("quantity", sweet.quantity);
       form.append("description", sweet.description || "");
 
-      // file upload
+      // priority: user-selected file → otherwise keep existing URL
       if (selectedFile) {
         form.append("image", selectedFile);
       } else {
@@ -51,6 +54,7 @@ export default function EditSweet() {
     }
   };
 
+  // show placeholder while loading
   if (!sweet) {
     return (
       <DashboardLayout title="Edit Sweet" widthClass="max-w-xl">
@@ -79,77 +83,65 @@ export default function EditSweet() {
 
         <form onSubmit={submit} className="space-y-4">
 
-          {/* NAME */}
+          {/* name */}
           <div>
             <label className="text-sm font-medium">Name</label>
             <Input
               value={sweet.name}
-              onChange={(e) =>
-                setSweet({ ...sweet, name: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, name: e.target.value })}
             />
           </div>
 
-          {/* CATEGORY */}
+          {/* category */}
           <div>
             <label className="text-sm font-medium">Category</label>
             <Input
               value={sweet.category}
-              onChange={(e) =>
-                setSweet({ ...sweet, category: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, category: e.target.value })}
             />
           </div>
 
-          {/* PRICE */}
+          {/* price */}
           <div>
             <label className="text-sm font-medium">Price</label>
             <Input
               type="number"
               value={sweet.price}
-              onChange={(e) =>
-                setSweet({ ...sweet, price: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, price: e.target.value })}
             />
           </div>
 
-          {/* QUANTITY */}
+          {/* quantity */}
           <div>
             <label className="text-sm font-medium">Quantity</label>
             <Input
               type="number"
               value={sweet.quantity}
-              onChange={(e) =>
-                setSweet({ ...sweet, quantity: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, quantity: e.target.value })}
             />
           </div>
 
-          {/* DESCRIPTION — NEW */}
+          {/* description */}
           <div>
             <label className="text-sm font-medium">Description</label>
             <textarea
               className="w-full border rounded p-2 text-sm"
               rows="3"
               value={sweet.description || ""}
-              onChange={(e) =>
-                setSweet({ ...sweet, description: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, description: e.target.value })}
             />
           </div>
 
-          {/* EXISTING IMAGE URL */}
+          {/* existing URL */}
           <div>
             <label className="text-sm font-medium">Image URL (optional)</label>
             <Input
               value={sweet.image || ""}
-              onChange={(e) =>
-                setSweet({ ...sweet, image: e.target.value })
-              }
+              onChange={(e) => setSweet({ ...sweet, image: e.target.value })}
             />
           </div>
 
-          {/* FILE UPLOAD */}
+          {/* file upload */}
           <div>
             <label className="text-sm font-medium">Upload New Image</label>
             <input
@@ -160,7 +152,7 @@ export default function EditSweet() {
             />
           </div>
 
-          {/* PREVIEW */}
+          {/* preview */}
           {selectedFile ? (
             <img
               src={URL.createObjectURL(selectedFile)}
@@ -175,14 +167,10 @@ export default function EditSweet() {
             />
           ) : null}
 
-          {/* BUTTONS */}
+          {/* buttons */}
           <div className="flex gap-3">
-            <Button type="submit" variant="primary">
-              Update
-            </Button>
-            <Button variant="secondary" onClick={() => navigate("/")}>
-              Cancel
-            </Button>
+            <Button type="submit" variant="primary">Update</Button>
+            <Button variant="secondary" onClick={() => navigate("/")}>Cancel</Button>
           </div>
         </form>
       </Card>
