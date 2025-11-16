@@ -6,6 +6,12 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
+// Simple email format check
+const isValidEmail = (email) => {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return pattern.test(email);
+};
+
 // Create JWT for a user
 const signToken = (user) => {
   return jwt.sign(
@@ -22,6 +28,10 @@ exports.register = async (req, res, next) => {
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: "name, email and password are required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
     }
 
     const existing = await User.findOne({ email });
@@ -53,6 +63,10 @@ exports.login = async (req, res, next) => {
 
     if (!email || !password) {
       return res.status(400).json({ message: "email and password are required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
     }
 
     const user = await User.findOne({ email });
