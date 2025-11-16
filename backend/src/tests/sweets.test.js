@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const getToken = (user) => jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
 
-describe('Sweet API', () => {
+describe('Sweets API', () => {
   let userToken, adminToken, sweet;
 
   beforeAll(async () => {
