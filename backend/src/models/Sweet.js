@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Sweet item schema for the shop
 const SweetSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -7,7 +8,7 @@ const SweetSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     quantity: { type: Number, default: 0 },
     description: { type: String, default: "" },
-    image: { type: String, default: "" }, // cloudinary URL
+    image: { type: String, default: "" }, // cloudinary url for the uploaded image
   },
   { timestamps: true }
 );
