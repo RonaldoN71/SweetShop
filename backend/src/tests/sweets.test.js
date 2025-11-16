@@ -19,7 +19,7 @@ describe('Sweets API', () => {
     sweet = await Sweet.create({ name: 'Ladoo', category: 'Indian', price: 10, quantity: 5 });
   });
 
-  test('user can view sweets', async () => {
+  test('user can view sweet', async () => {
     const res = await request(app)
       .get('/api/sweets')
       .set('Authorization', `Bearer ${userToken}`);
