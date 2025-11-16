@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { login as loginApi } from "../api/authApi";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -7,27 +7,30 @@ import Card from "../components/ui/Card";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { AuthHeroBackground } from "../components/layout/AuthHeroBackground";
-import { useEffect } from "react";
 
 export default function Login() {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // Disable page scroll while on login screen
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr("");
     setLoading(true);
+
     try {
       const res = await loginApi({ email, password });
       login(res.data.token, res.data.user);
@@ -41,12 +44,11 @@ export default function Login() {
 
   return (
     <AuthHeroBackground>
-      <div className=" no-scroll-page w-full max-w-md px-6">
+      <div className="w-full max-w-md px-6">
         <Card className="p-8 shadow-xl">
-          
+          {/* Header */}
           <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-full bg-gray-700 
-                            flex items-center justify-center mb-4 shadow-md">
+            <div className="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center mb-4 shadow-md">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
               </svg>
@@ -56,14 +58,15 @@ export default function Login() {
             <p className="text-sm text-gray-500 mb-6">Sign in to your Sweet Shop account</p>
           </div>
 
+          {/* Error message */}
           {err && (
             <div className="mb-4 text-sm text-red-700 bg-red-100 p-2 rounded">
               {err}
             </div>
           )}
 
+          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <Input
@@ -100,7 +103,6 @@ export default function Login() {
                 Register here
               </button>
             </p>
-
           </form>
         </Card>
       </div>
