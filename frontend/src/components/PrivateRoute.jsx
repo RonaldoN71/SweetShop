@@ -4,5 +4,9 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function PrivateRoute({ children }) {
   const { token } = useContext(AuthContext);
-  return token ? children : <Navigate to="/login" replace />;
+
+  // If no token, redirect to login
+  if (!token) return <Navigate to="/login" replace />;
+
+  return children;
 }
