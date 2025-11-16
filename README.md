@@ -1,26 +1,19 @@
 # Mithaas – MERN Inventory Management Application
 
 ## 🔗 Live Application URL  
-(Add your deployed frontend link here)
-
+https://sweetshop-ebbi.onrender.com
 ## 🔌 Backend API URL  
-(Add your Cyclic backend link here)
+https://sweetshop-ebbi.onrender.com
 
-## 🔐 Demo Login Credentials
+## 🔐 Demo Login Credentials : use the below credentials for faster login
 
 ### Admin
-Email: admin@example.com
+Email: mithaasAdmin@gmail.com
 Password: 123456
-
-shell
-Copy code
 
 ### User
-Email: user@example.com
+Email: mithaas@gmail.com
 Password: 123456
-
-markdown
-Copy code
 
 ## 🧠 My AI Usage
 
@@ -53,14 +46,8 @@ CLOUDINARY_CLOUD=your_cloud_name
 CLOUDINARY_KEY=your_api_key
 CLOUDINARY_SECRET=your_api_secret
 
-shell
-Copy code
-
 ### Frontend `.env`
 VITE_API_URL=https://your-backend.cyclic.app
-
-shell
-Copy code
 
 ## ▶️ Running Locally
 
@@ -69,16 +56,10 @@ cd backend
 npm install
 npm run dev
 
-shell
-Copy code
-
 ### Frontend
 cd frontend
 npm install
 npm run dev
-
-shell
-Copy code
 
 ## 🧪 Basic API Routes
 POST /api/auth/register
