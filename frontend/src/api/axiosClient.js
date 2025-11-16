@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://sweetshop-ebbi.onrender.com/"
+const API = "https://sweetshop-ebbi.onrender.com"
 
 // Axios instance for all backend requests
 const axiosClient = axios.create({
