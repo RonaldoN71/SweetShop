@@ -18,7 +18,7 @@ export default function Navbar() {
 
         {/* Brand */}
         <Link to="/" className="text-xl font-semibold text-black">
-          Methaas
+          Mithaas
         </Link>
 
         {/* Sweet headline (centered on larger screens) */}
