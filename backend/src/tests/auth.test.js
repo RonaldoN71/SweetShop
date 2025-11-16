@@ -5,7 +5,7 @@ const User = require('../models/User');
 describe('Auth API', () => {
   beforeEach(async () => await User.deleteMany());
 
-  test('registers a new user and returns token', async () => {
+  test('register a new user and returns token', async () => {
     const res = await request(app)
       .post('/api/auth/register')
       .send({
