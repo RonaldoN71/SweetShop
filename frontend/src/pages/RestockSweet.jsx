@@ -11,10 +11,11 @@ export default function RestockSweet() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [sweet, setSweet] = useState(null);
-  const [qty, setQty] = useState(1);
+  const [sweet, setSweet] = useState(null); // selected sweet
+  const [qty, setQty] = useState(1); // added amount
   const [err, setErr] = useState("");
 
+  // load sweet details
   useEffect(() => {
     (async () => {
       try {
@@ -26,6 +27,7 @@ export default function RestockSweet() {
     })();
   }, [id]);
 
+  // send restock request
   const submit = async (e) => {
     e.preventDefault();
     try {
@@ -56,7 +58,11 @@ export default function RestockSweet() {
       }
     >
       <Card className="p-8">
-        {err && <div className="text-sm text-red-700 bg-red-100 p-2 rounded mb-4">{err}</div>}
+        {err && (
+          <div className="text-sm text-red-700 bg-red-100 p-2 rounded mb-4">
+            {err}
+          </div>
+        )}
 
         <form onSubmit={submit} className="space-y-4">
           <div>
@@ -73,6 +79,7 @@ export default function RestockSweet() {
             <Button type="submit" variant="primary">
               Restock
             </Button>
+
             <Button type="button" variant="secondary" onClick={() => navigate("/")}>
               Cancel
             </Button>
