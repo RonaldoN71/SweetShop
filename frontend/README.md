@@ -7,10 +7,6 @@ Built with **React**, **Vite**, **TailwindCSS**, and deployed on **Vercel**.
 npm install
 npm run dev
 
-## ⚙️ Environment Variables
-Create `.env`:
-VITE_API_URL=https://your-backend.cyclic.app
-
 ## 🌐 Deployment
 Frontend hosted on **Vercel**.
 
