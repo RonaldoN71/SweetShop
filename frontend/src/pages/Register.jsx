@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { register as registerApi } from "../api/authApi";
 import { useNavigate } from "react-router-dom";
 
@@ -6,15 +6,17 @@ import Card from "../components/ui/Card";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { AuthHeroBackground } from "../components/layout/AuthHeroBackground";
-import { useEffect } from "react";
+
 export default function Register() {
+  const navigate = useNavigate();
+
+  // Disable page scroll while on register screen
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,6 +24,7 @@ export default function Register() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Submit registration form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr("");
@@ -39,7 +42,7 @@ export default function Register() {
 
   return (
     <AuthHeroBackground>
-      <div className="no-scroll-page w-full max-w-md px-6">
+      <div className="w-full max-w-md px-6">
         <Card className="p-8 shadow-xl">
 
           <h2 className="text-2xl font-semibold text-center mb-2">
@@ -50,6 +53,7 @@ export default function Register() {
             Register to manage your Sweet Shop
           </p>
 
+          {/* Error message */}
           {err && (
             <div className="mb-4 text-sm text-red-700 bg-red-100 p-2 rounded">
               {err}
@@ -57,7 +61,7 @@ export default function Register() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            
+
             <div>
               <label className="block text-sm mb-1">Name</label>
               <Input
