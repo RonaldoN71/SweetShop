@@ -6,7 +6,7 @@ export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Handle logout + redirect
+  // handle logout + redirect
   const handleLogout = () => {
     logout();
     navigate("/login");
