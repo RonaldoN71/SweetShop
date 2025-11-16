@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = process.env.VITE_API_URL;
+const API = "https://sweetshop-ebbi.onrender.com/"
 
 // Axios instance for all backend requests
 const axiosClient = axios.create({
