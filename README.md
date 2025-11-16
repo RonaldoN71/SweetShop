@@ -1,7 +1,7 @@
 # Mithaas – MERN Inventory Management Application
 
 ## 🔗 Live Application URL  
-https://sweetshop-ebbi.onrender.com
+https://mithaas-khaki.vercel.app
 ## 🔌 Backend API URL  
 https://sweetshop-ebbi.onrender.com
 
