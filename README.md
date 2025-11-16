@@ -34,7 +34,7 @@ SweetShop is a full-stack MERN application for managing sweets inventory, purcha
 
 ## 🛠 Tech Stack
 **Frontend:** React (Vite), TailwindCSS, Lucide Icons, Vercel  
-**Backend:** Node.js, Express.js, JWT, Multer, Cloudinary, Cyclic.sh  
+**Backend:** Node.js, Express.js, JWT, Multer, Cloudinary,Render
 **Database:** MongoDB Atlas  
 
 ## ⚙️ Environment Variables
@@ -47,7 +47,7 @@ CLOUDINARY_KEY=your_api_key
 CLOUDINARY_SECRET=your_api_secret
 
 ### Frontend `.env`
-VITE_API_URL=https://your-backend.cyclic.app
+VITE_API_URL=https://sweetshop-ebbi.onrender.com
 
 ## ▶️ Running Locally
 
