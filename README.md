@@ -8,7 +8,7 @@ https://sweetshop-ebbi.onrender.com
 ## 🔐 Demo Login Credentials : use the below credentials for faster login
 
 ### Admin
-Email: mithaasAdmin@gmail.com
+Email: mithaasadmin@gmail.com
 Password: 123456
 
 ### User
