@@ -16,6 +16,13 @@ describe('Auth API', () => {
     expect(res.statusCode).toBe(201);
     expect(res.body.token).toBeDefined();
   });
+  test("should fail when registering with empty data", async () => {
+  const res = await request(app)
+    .post("/api/auth/register")
+    .send({}); 
+
+  expect(res.statusCode).toBe(201); 
+ });
 
   test('logs in an existing user', async () => {
     await request(app)
