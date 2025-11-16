@@ -33,7 +33,7 @@ exports.register = async (req, res, next) => {
     const { name, email, password, role } = req.body || {};
 
     // Simple validation
-    if (!name || !password) {
+    if (!name || !email || !password) {
       return res
         .status(400)
         .json({ message: "name, email and password are required" });
