@@ -10,15 +10,15 @@ import DashboardLayout from "../components/layout/DashboardLayout";
 export default function CreateSweet() {
   const navigate = useNavigate();
 
-  // form fields
+  // basic form fields
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // optional direct URL
+  const [imageUrl, setImageUrl] = useState(""); // optional external URL
   const [desc, setDesc] = useState("");
 
-  // NEW: file upload
+  // image chosen from file input
   const [selectedFile, setSelectedFile] = useState(null);
 
   const [err, setErr] = useState("");
@@ -28,23 +28,23 @@ export default function CreateSweet() {
     setErr("");
 
     try {
+      // backend expects multipart, so use FormData
       const form = new FormData();
-
       form.append("name", name);
       form.append("category", category);
       form.append("price", price);
       form.append("quantity", quantity);
       form.append("description", desc);
 
-      // If file uploaded → send file
+      // upload file if user picked one
       if (selectedFile) {
         form.append("image", selectedFile);
       } else {
-        // Fallback: direct URL if provided
+        // fallback to manual URL
         form.append("image", imageUrl);
       }
 
-      await createSweet(form); // sweetApi must send multipart now
+      await createSweet(form);
       navigate("/");
     } catch (error) {
       setErr(error.response?.data?.message || "Create failed");
@@ -70,38 +70,48 @@ export default function CreateSweet() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
-          {/* NAME */}
+          
+          {/* name */}
           <div>
             <label className="text-sm">Sweet Name</label>
             <Input value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
-          {/* CATEGORY */}
+          {/* category */}
           <div>
             <label className="text-sm">Category</label>
             <Input value={category} onChange={(e) => setCategory(e.target.value)} />
           </div>
 
-          {/* PRICE */}
+          {/* price */}
           <div>
             <label className="text-sm">Price (₹)</label>
-            <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
+            <Input
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
           </div>
 
-          {/* QUANTITY */}
+          {/* quantity */}
           <div>
             <label className="text-sm">Quantity</label>
-            <Input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} required />
+            <Input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              required
+            />
           </div>
 
-          {/* OPTIONAL DIRECT IMAGE URL */}
+          {/* optional URL */}
           <div>
             <label className="text-sm">Image URL (optional)</label>
             <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
           </div>
 
-          {/* FILE UPLOAD */}
+          {/* file upload */}
           <div>
             <label className="text-sm">Upload Image (Cloudinary)</label>
             <input
@@ -112,7 +122,7 @@ export default function CreateSweet() {
             />
           </div>
 
-          {/* PREVIEW */}
+          {/* preview */}
           {selectedFile && (
             <img
               src={URL.createObjectURL(selectedFile)}
@@ -121,7 +131,7 @@ export default function CreateSweet() {
             />
           )}
 
-          {/* DESCRIPTION */}
+          {/* description */}
           <div>
             <label className="text-sm">Description</label>
             <textarea
@@ -132,10 +142,12 @@ export default function CreateSweet() {
             />
           </div>
 
-          {/* BUTTONS */}
+          {/* actions */}
           <div className="flex gap-3">
             <Button type="submit" variant="primary">Create</Button>
-            <Button variant="secondary" onClick={() => navigate("/")}>Cancel</Button>
+            <Button variant="secondary" onClick={() => navigate("/")}>
+              Cancel
+            </Button>
           </div>
         </form>
       </Card>
