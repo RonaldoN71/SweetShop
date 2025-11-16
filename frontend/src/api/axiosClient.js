@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = process.env.VITE_API_URL || "http://localhost:4000";
+const API = process.env.VITE_API_URL;
 
 // Axios instance for all backend requests
 const axiosClient = axios.create({
